@@ -2,11 +2,11 @@
 
 A minimal implementation built from scratch in pure PyTorch — no CUDA required.
 
-This project was built as a portfolio piece for a PhD application in Computer Graphics / Neural Rendering at Lund University. It demonstrates the core ideas behind neural rendering: representing a 3D scene as a continuous function learned by a neural network, then rendering novel views via volumetric ray marching.
+This project demonstrates the core ideas behind neural rendering: representing a 3D scene as a continuous function learned by a neural network, then rendering novel views via volumetric ray marching.
 
 ---
 
-## What is NeRF?
+# What is NeRF?
 
 A Neural Radiance Field represents a 3D scene as a function:
 
@@ -30,7 +30,7 @@ where `T(t) = exp(-∫₀ᵗ σ(r(s)) ds)` is the transmittance (how much light 
 
 ---
 
-## Project Structure
+# Project Structure
 
 ```
 nerf-mini/
@@ -46,9 +46,9 @@ nerf-mini/
 
 ---
 
-## Quickstart
+# Quickstart
 
-### 1. Install dependencies
+# 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -59,7 +59,7 @@ PyTorch CPU-only (smaller download):
 pip install torch --index-url https://download.pytorch.org/whl/cpu
 ```
 
-### 2. Train
+# 2. Train
 
 ```bash
 python train.py
@@ -75,7 +75,7 @@ Higher quality (takes longer):
 python train.py --iters 10000 --height 100 --width 100
 ```
 
-### 3. Render turntable GIF
+# 3. Render turntable GIF
 
 ```bash
 python viewer.py
@@ -85,9 +85,9 @@ Output: `results/turntable.gif`
 
 ---
 
-## Key Components
+# Key Components
 
-### `src/nerf_model.py` — TinyNeRF
+# `src/nerf_model.py` — TinyNeRF
 
 The MLP takes positionally-encoded 3D coordinates and view directions as input. **Positional encoding** maps raw coordinates to a higher-dimensional space of sinusoids, which is essential for the network to learn high-frequency detail:
 
@@ -99,19 +99,19 @@ Architecture:
 - Geometry branch: `pos_enc → 4×Linear(128) → density + feature`
 - Appearance branch: `feature + dir_enc → 2×Linear → RGB`
 
-### `src/ray_march.py` — Volumetric Rendering
+# `src/ray_march.py` — Volumetric Rendering
 
 1. **Ray generation**: compute ray origin + direction for each pixel using camera intrinsics and the camera-to-world pose matrix
 2. **Stratified sampling**: divide each ray into N bins, sample one point per bin (with random jitter during training for better coverage)
 3. **Volume compositing**: integrate colour and density using the discrete approximation of the rendering integral
 
-### `src/dataset.py` — Synthetic Scene
+# `src/dataset.py` — Synthetic Scene
 
 Generates a procedural coloured cube with known camera poses arranged in a circle. No external data needed — the scene is rendered analytically for ground-truth training images.
 
 ---
 
-## Results
+# Results
 
 After ~5000 iterations on the synthetic scene:
 
@@ -129,7 +129,7 @@ Training outputs:
 
 ---
 
-## Concepts Demonstrated
+# Concepts Demonstrated
 
 | Concept | Where |
 |---------|-------|
@@ -143,7 +143,7 @@ Training outputs:
 
 ---
 
-## Extending This Project
+# Extending This Project
 
 Some directions to explore next:
 
