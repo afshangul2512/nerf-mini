@@ -38,9 +38,9 @@ except ImportError:
     HAS_MPL = False
 
 
-# ---------------------------------------------------------------------------
+
 # Helpers
-# ---------------------------------------------------------------------------
+
 
 def psnr(mse: float) -> float:
     """Peak Signal-to-Noise Ratio from mean squared error."""
@@ -74,9 +74,9 @@ def render_full_image(model, c2w, height, width, focal, near, far, num_samples):
     return pixel_rgb.reshape(height, width, 3)
 
 
-# ---------------------------------------------------------------------------
+
 # Training loop
-# ---------------------------------------------------------------------------
+
 
 def train(args):
     os.makedirs("results",     exist_ok=True)
@@ -211,9 +211,9 @@ def train(args):
     print(f"\nDone! Best val PSNR: {best_psnr:.2f} dB")
 
 
-# ---------------------------------------------------------------------------
+
 # CLI
-# ---------------------------------------------------------------------------
+
 
 if __name__ == "__main__":
     p = argparse.ArgumentParser(description="Train TinyNeRF on synthetic cube scene")
